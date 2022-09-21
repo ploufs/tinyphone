@@ -429,7 +429,7 @@ void TinyPhoneHttpServer::Start() {
 					tp::ParseSIPURI(ci.remoteUri, &uri);
 					json callinfo = {
 						{ "id", ci.id },
-						{ "account", call->getAccount()->Name() },
+						/*{ "account", call->getAccount()->Name() },
 						{ "sid", ci.callIdString },
 						{ "party", ci.remoteUri },
 						{ "callerId", uri.user },
@@ -437,7 +437,7 @@ void TinyPhoneHttpServer::Start() {
 						{ "state", ci.stateText },
 						{ "direction", call->incoming ? "INCOMING" : "OUTGOING" },
 						{ "duration", ci.totalDuration.sec },
-						{ "hold", call->HoldState()._to_string() }
+						{ "hold", call->HoldState()._to_string() }*/
 					};
 					response["calls"].push_back(callinfo);
 				}
