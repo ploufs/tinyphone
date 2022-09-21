@@ -424,9 +424,23 @@ void TinyPhoneHttpServer::Start() {
 			};
 			BOOST_FOREACH(SIPCall* call, phone.Calls()) {
 				if (call->getId() >= 0) {
+					CROW_LOG_INFO << call->getId();
 					auto ci = call->getInfo();
+					
 					tp::SIPUri uri;
 					tp::ParseSIPURI(ci.remoteUri, &uri);
+
+					//debug
+					CROW_LOG_INFO << "account" << call->getAccount()->Name();
+					CROW_LOG_INFO << "sid" << ci.callIdString;
+					CROW_LOG_INFO << "party" << ci.remoteUri;
+					CROW_LOG_INFO << "callerId" << uri.user;
+					CROW_LOG_INFO << "displayName" << uri.name;
+					CROW_LOG_INFO << "state" << ci.stateText;
+					CROW_LOG_INFO << "direction" << call->incoming ? "INCOMING" : "OUTGOING";
+					CROW_LOG_INFO << "duration" << ci.totalDuration.sec;
+					CROW_LOG_INFO << "hold" << call->HoldState()._to_string();
+
 					json callinfo = {
 						{ "id", ci.id },
 						/*{ "account", call->getAccount()->Name() },
